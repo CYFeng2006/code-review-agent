@@ -1,0 +1,30 @@
+# Code Review Agent 配置文件
+llm:
+  # 支持OpenAI兼容的API（通义千问/OpenAI/Claude等）
+  provider: "openai"  # openai | dashscope | anthropic
+  api_key: ""          # 你的API Key
+  base_url: "https://api.openai.com/v1"  # OpenAI默认地址
+  model: "gpt-4o-mini"
+  temperature: 0.3
+  max_tokens: 2000
+
+agent:
+  max_iterations: 10       # Agent最大迭代次数
+  max_memory_messages: 20   # 上下文记忆最大消息数
+  retry_attempts: 3         # 错误重试次数
+  retry_delay: 1.0          # 重试延迟（秒）
+
+tools:
+  code_executor:
+    enabled: true
+    timeout: 10             # 代码执行超时（秒）
+    allowed_modules: ["math", "json", "re", "collections", "itertools", "functools"]
+  file_reader:
+    enabled: true
+    max_file_size: 1048576  # 最大1MB
+    allowed_extensions: [".py", ".js", ".ts", ".java", ".go", ".rs", ".c", ".cpp", ".h", ".txt", ".md"]
+  ast_analyzer:
+    enabled: true
+  code_search:
+    enabled: true
+    max_results: 20
